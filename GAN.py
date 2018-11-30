@@ -19,7 +19,7 @@ BATCH_SIZE = 64
 LR_G = 0.0001           # learning rate for generator
 LR_D = 0.0001           # learning rate for discriminator
 N_IDEAS = 5             # think of this as number of ideas for generating an art work (Generator)
-ART_COMPONENTS = 15     # it could be total point G can draw in the canvas
+ART_COMPONENTS = 30     # it could be total point G can draw in the canvas
 PAINT_POINTS = np.vstack([np.linspace(-1, 1, ART_COMPONENTS) for _ in range(BATCH_SIZE)])
 
 # show our beautiful painting range
@@ -78,6 +78,8 @@ for step in range(10000):
     if step % 50 == 0:  # plotting
         plt.figure()
         plt.plot(PAINT_POINTS[0], G_paintings.data.numpy()[0], c='#4AD631', lw=3, label='Generated painting', )
+        plt.plot(PAINT_POINTS[0], 2 * np.power(PAINT_POINTS[0], 2) + 1, c='#74BCFF', lw=3, label='upper bound')
+        plt.plot(PAINT_POINTS[0], 1 * np.power(PAINT_POINTS[0], 2) + 0, c='#FF9359', lw=3, label='lower bound')
         plt.ioff()
         plt.show()
     #     plt.cla()
